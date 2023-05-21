@@ -1,52 +1,49 @@
-package com.bar.barproject.waiterhyrReporsitory;
+package com.bar.barproject.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table
-public class waiterhyr {
-
+public class admin {
     @Id
+   // @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private Integer id;
-    private String name;
+    @Column(name="user")
+    private String user;
+    @Column(name="password")
     private String password;
 
-    
+    public admin(){
+
+    }
+
     public Integer getId() {
         return id;
     }
-
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-
-    public String getName() {
-        return name;
+    public String getUser() {
+        return user;
     }
 
-
-    public void setName(String name) {
-        this.name = name;
+    public void setUser(String user) {
+        this.user = user;
     }
-
 
     public String getPassword() {
         return password;
     }
 
-
     public void setPassword(String password) {
         this.password = password;
     }
-
-
-    public waiterhyr(){
-
-    }
-
+    
     
 }

@@ -1,4 +1,4 @@
-package com.bar.barproject.ReprositoryDrinks;
+package com.bar.barproject.Model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

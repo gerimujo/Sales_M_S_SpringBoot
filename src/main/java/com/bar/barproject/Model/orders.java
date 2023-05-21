@@ -1,4 +1,4 @@
-package com.bar.barproject.orderRep;
+package com.bar.barproject.Model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +24,6 @@ public class orders {
     private String product;
     @Column(name="quatity")
     private Integer quatity;
- 
     @Column(name="price")
     private Integer price;
     @Column(name="idper")

@@ -1,4 +1,4 @@
-package com.bar.barproject.Adminhyrreprository;
+package com.bar.barproject.Model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
