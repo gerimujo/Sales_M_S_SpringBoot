@@ -17,6 +17,8 @@ public class admin {
     @Column(name="password")
     private String password;
 
+   
+
     public admin(){
 
     }

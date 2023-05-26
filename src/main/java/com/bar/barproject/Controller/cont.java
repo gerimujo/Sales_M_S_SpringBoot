@@ -1,7 +1,6 @@
 package com.bar.barproject.Controller;
 
-import java.security.Provider.Service;
-import java.util.ArrayList;
+
 //import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bar.barproject.Model.Verify;
 import com.bar.barproject.Model.admin;
-import com.bar.barproject.Model.adminhyr;
 import com.bar.barproject.Model.drinks;
 import com.bar.barproject.Model.orders;
 import com.bar.barproject.Model.waiter;
@@ -63,12 +62,12 @@ private Services services;
 return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Not done");
        }
     } 
-     @GetMapping(value="/getDrinks/{id}")
+     @PostMapping(value="/getDrinks/{id}")
     @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
-    public ResponseEntity<String> get(@PathVariable Integer id){
+    public ResponseEntity<String> get(@PathVariable Integer id, @RequestBody Verify ver){
         
        try{
-        ResponseEntity<String> data = services.getdrink(id);
+        ResponseEntity<String> data = services.getdrink(ver);
         return(data);
 
        }catch(Exception e){
@@ -77,11 +76,11 @@ return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Not done")
        }
        
     }
-  @GetMapping(value="/getDrinks1/{id}")
+  @PostMapping(value="/getDrinks1/{id}")
     @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
-    public ResponseEntity<String> get1(@PathVariable Integer id){
+    public ResponseEntity<String> get1(@PathVariable Integer id, @RequestBody Verify body){
       try{
-        ResponseEntity<String> data = services.get1(id);
+        ResponseEntity<String> data = services.get1(body);
 return(data);
       }catch(Exception e){
         return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Not done");
@@ -130,11 +129,11 @@ public ResponseEntity<String> addwaiter(@RequestBody final waiter waiter){
     }
 }
 
-@GetMapping(value="/getWaiter/{id}")
+@PostMapping(value="/getWaiter/{id}")
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
-public ResponseEntity<String> getwait(@PathVariable Integer id){
+public ResponseEntity<String> getwait(@PathVariable Integer id, @RequestBody Verify vebody){
  try{
-    ResponseEntity<String> data =  services.getwait(id);
+    ResponseEntity<String> data =  services.getwait(vebody);
     return data;
 
  }catch(Exception e){
@@ -145,10 +144,10 @@ public ResponseEntity<String> getwait(@PathVariable Integer id){
 
 @DeleteMapping(value="/deletewaiter")
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
-public ResponseEntity<String> deletewaiter(@RequestParam Integer id){
+public ResponseEntity<String> deletewaiter(@RequestParam Integer id,@RequestBody Verify verify){
 
 try{
-    ResponseEntity<String> data =  services.deletewaiter(id);
+    ResponseEntity<String> data =  services.deletewaiter(verify);
     return data;
 
 }catch(Exception e){
@@ -196,11 +195,11 @@ public ResponseEntity<String> addorder(@RequestBody List<orders> orderList){
     }
 }
 
-@GetMapping(value="/getdays/{name}")
+@PostMapping(value="/getdays/{name}")
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
-public ResponseEntity<Integer> getwaiterhyr1(@PathVariable String name){
+public ResponseEntity<Integer> getwaiterhyr1(@PathVariable String name,@RequestBody Verify ver){
 try{
-    ResponseEntity<Integer> num = services.getwaiterhyr1(name);
+    ResponseEntity<Integer> num = services.getwaiterhyr1(ver);
     return num;
 
 }catch(Exception e){
@@ -211,11 +210,11 @@ try{
 }
 
 
-@GetMapping(value="/getdays1/{id}")
+@PostMapping(value="/getdays1/{id}")
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
-public Integer getwaiterhyr11(@PathVariable Integer id){
+public Integer getwaiterhyr11(@PathVariable Integer id, @RequestBody Verify bod){
 try{
-    Integer id1 = services.getwaiterhyr11(id);
+    Integer id1 = services.getwaiterhyr11(bod);
     return id1;
 
 }catch(Exception e){
@@ -225,12 +224,12 @@ try{
   
 }
 
-@GetMapping(value="/allorders")
+@PostMapping(value="/allorders")
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 
-public ResponseEntity<String> getorders(){
+public ResponseEntity<String> getorders(@RequestBody Verify bod){
     try{
-        ResponseEntity<String> data =  services.getorders();
+        ResponseEntity<String> data =  services.getorders(bod);
         return data;
 
     }catch(Exception e){
@@ -244,9 +243,9 @@ public ResponseEntity<String> getorders(){
 
 @PutMapping(value="/updatestateday")
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
-public ResponseEntity<String> updatestate(){
+public ResponseEntity<String> updatestate(Verify bod){
    try{
-ResponseEntity<String> data = services.updatestate();
+ResponseEntity<String> data = services.updatestate(bod);
 return data;
 
    }catch(Exception e){
@@ -255,11 +254,11 @@ return data;
    }
 }
 
-@GetMapping(value="/getwaitershistory/{id}")
+@PostMapping(value="/getwaitershistory/{id}")
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
-public ResponseEntity<String> getwaiters(@PathVariable Integer id){
+public ResponseEntity<String> getwaiters(@PathVariable Integer id, @RequestBody Verify ver){
 try{
-    ResponseEntity<String> data1 =  services.getwaiters(id);
+    ResponseEntity<String> data1 =  services.getwaiters(ver);
     return  data1;
 
 }catch(Exception e){
@@ -287,29 +286,30 @@ public  ResponseEntity<String>  getday(@RequestBody waiterhyr datas){
 
 @PostMapping(value="/loginadmin")
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
-public ResponseEntity<String> loginadmin(@RequestBody admin data){
+public ResponseEntity<Verify> loginadmin(@RequestBody admin data){
    try{
-    ResponseEntity<String> data1 = services.loginadmin(data);
+    ResponseEntity<Verify> data1 = services.loginadmin(data);
     return data1;
 
 
    }catch(Exception e){
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Data is not correct");
-
+    Verify respo = new Verify("Data is not correct", "Errortoken");
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respo);
 
    }
 
   
 }
 
-@PutMapping(value="/loginwaiter")
+@PostMapping(value="/loginwaiter")
 @CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
-public ResponseEntity<String> loginwaiter(@RequestBody waiter data){
+public ResponseEntity<Verify> loginwaiter(@RequestBody waiter data){
 try{
-ResponseEntity<String> data1 =  services.loginwaiter(data);
+ResponseEntity<Verify> data1 =  services.loginwaiter(data);
 return data1;
 }catch(Exception e){
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Data is not correct");
+    Verify respo = new Verify("Data is not correct", "Errortoken");
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respo);
 
 
 }

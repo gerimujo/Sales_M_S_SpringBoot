@@ -32,6 +32,18 @@ public class orders {
     private Integer day;
     @Column(name="dayaktiv")
     private Integer dayaktiv;
+
+
+    private String token;
+    public String getToken() {
+        return token;
+    }
+
+
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 public orders(){
 
 }
